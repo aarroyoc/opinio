@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Opinio - ¡Haz encuestas!</title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <h1>Encuesta <%= poll.title %></h1>
+        <p><%= poll.description %></p>
+        <ul>
+        <% for(let i=0;i<options.length;i++) { %>
+            <li>
+                <a href="/vote/<%= poll.id %>/<%= options[i].id %>"><%= options[i].text %></a>
+                 - <%= options[i].votes %>
+            </li>
+        <% } %>
+        </ul>
+        <% if(owner){ %>
+        <h3>Crear opciones</h3>
+        <form method="POST" action="/option">
+            <input type="text" name="text" placeholder="Opción">
+            <input type="hidden" name="poll_id" value="<%= poll.id %>">
+            <input type="submit" value="Crear opción">
+        </form>
+        <% } %>
+    </body>
+</html>

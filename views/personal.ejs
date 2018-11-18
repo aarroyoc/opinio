@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Opinio - ¡Haz encuestas!</title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <h1>Opinio</h1>
+        <h4>Crea una nueva encuesta</h4>
+        <form method="POST" action="/poll">
+            <input type="text" name="title" placeholder="Title">
+            <br>
+            <input type="text" name="description" placeholder="Description">
+            <br>
+            <label>Public Vote: </label><input type="checkbox" name="publicVote">
+            <br>
+            <input type="submit" value="Crear encuesta">
+        </form>
+        <h4>Encuestas creadas</h4>
+        <ul>
+            <% for(let i=0;i<polls.length;i++) { %>
+                <li><a href="/poll/<%= polls[i].id %>"><%= polls[i].title %></a></li>
+            <% } %>
+        </ul>
+    </body>
+</html>
