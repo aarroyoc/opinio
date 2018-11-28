@@ -42,9 +42,10 @@ app.get("/",async function(req,res){
 });
 
 app.post("/login",async function(req,res){
+    console.log(req.body);
     let username = req.body.username;
     let password = req.body.password;
-    User.findOne({username: username}).then((user)=>{
+    User.findOne({where: {username: username}}).then((user)=>{
         if(user.password == password){
             users.set(req.session.id,username);
             res.redirect("/personal");
@@ -125,7 +126,9 @@ app.post("/option",auth,async function(req,res){
     let poll_id = req.body.poll_id;
 
     let poll = await Poll.findOne({
-        id: poll_id
+	where: {
+        	id: poll_id
+   	}
     });
     if(poll.user_id === username){
         await Option.create({
